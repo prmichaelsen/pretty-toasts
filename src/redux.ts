@@ -1,7 +1,7 @@
 /**
  * Pretty Toasts - Redux Mode
  * Use this entry point if you use Redux Toolkit
- * 
+ *
  * @packageDocumentation
  */
 
@@ -40,9 +40,10 @@ export {
 
 // Hooks
 /**
- * Universal toast hook - auto-detects Redux mode
+ * Redux toast hook - uses Redux Toolkit
+ * Must be used within Redux Provider with toastReducer
  */
-export { useToast } from './hooks/useToast';
+export { useToast } from './hooks/useToastRedux';
 
 /**
  * Media query hook for responsive behavior

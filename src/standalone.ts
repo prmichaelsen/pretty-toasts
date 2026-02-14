@@ -1,7 +1,7 @@
 /**
  * Pretty Toasts - Standalone Mode (No Redux)
  * Use this entry point if you don't use Redux
- * 
+ *
  * @packageDocumentation
  */
 
@@ -21,9 +21,10 @@ export { StandaloneToastContainer } from './components/StandaloneToastContainer'
 
 // Hooks
 /**
- * Universal toast hook - auto-detects standalone mode
+ * Standalone toast hook - uses React Context only
+ * Must be used within ToastProvider
  */
-export { useToast } from './hooks/useToast';
+export { useToast } from './hooks/useToastStandalone';
 
 /**
  * Media query hook for responsive behavior
