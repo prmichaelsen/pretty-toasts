@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { Toast, ToastOptions, ToastActions } from '../types';
 
 interface ToastContextValue extends ToastActions {
@@ -68,7 +68,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToasts([]);
   }, []);
 
-  const value: ToastContextValue = {
+  const value: ToastContextValue = useMemo(() => ({
     toasts,
     addToast,
     updateToast,
@@ -77,7 +77,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     resumeToast,
     makeToastPermanent,
     clearAllToasts,
-  };
+  }), [toasts, addToast, updateToast, removeToast, pauseToast, resumeToast, makeToastPermanent, clearAllToasts]);
 
   return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
 };
