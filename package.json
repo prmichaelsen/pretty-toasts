@@ -5,6 +5,23 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./standalone": {
+      "import": "./dist/standalone.esm.js",
+      "require": "./dist/standalone.js",
+      "types": "./dist/standalone.d.ts"
+    },
+    "./redux": {
+      "import": "./dist/redux.esm.js",
+      "require": "./dist/redux.js",
+      "types": "./dist/redux.d.ts"
+    }
+  },
   "files": [
     "dist",
     "README.md"

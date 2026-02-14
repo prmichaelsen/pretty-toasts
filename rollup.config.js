@@ -3,17 +3,17 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-export default {
-  input: 'src/index.ts',
+const createConfig = (input, outputName) => ({
+  input,
   output: [
     {
-      file: 'dist/index.js',
+      file: `dist/${outputName}.js`,
       format: 'cjs',
       sourcemap: true,
       exports: 'named',
     },
     {
-      file: 'dist/index.esm.js',
+      file: `dist/${outputName}.esm.js`,
       format: 'esm',
       sourcemap: true,
     },
@@ -44,4 +44,15 @@ export default {
     '@reduxjs/toolkit',
     'react-redux',
   ],
-};
+});
+
+export default [
+  // Main entry (includes everything for backward compatibility)
+  createConfig('src/index.ts', 'index'),
+  
+  // Standalone entry (no Redux dependencies)
+  createConfig('src/standalone.ts', 'standalone'),
+  
+  // Redux entry (includes Redux dependencies)
+  createConfig('src/redux.ts', 'redux'),
+];
