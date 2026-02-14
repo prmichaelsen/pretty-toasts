@@ -1,5 +1,5 @@
 {
-  "name": "pretty-toasts",
+  "name": "@prmichaelsen/pretty-toasts",
   "version": "1.0.0",
   "description": "Beautiful gradient toast notifications with Redux and standalone support",
   "main": "dist/index.js",
