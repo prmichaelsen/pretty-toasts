@@ -6,7 +6,7 @@ project:
   version: 1.0.0
   started: 2026-02-14
   status: in_progress
-  current_milestone: M1
+  current_milestone: M2
   description: |
     A portable React toast notification library with beautiful gradient styling,
     supporting both Redux Toolkit and standalone React Context modes.
@@ -25,6 +25,19 @@ milestones:
     notes: |
       Most core functionality is complete. Missing critical build configuration
       and wrapper components for proper Redux/standalone integration.
+  
+  - id: M2
+    name: Testing & Documentation
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 1
+    tasks_completed: 0
+    tasks_total: 3
+    notes: |
+      Set up comprehensive testing and documentation infrastructure including
+      Storybook for interactive demos, GitHub Pages deployment, and Cypress E2E tests.
 
 # Tasks are granular work items within milestones
 tasks:
@@ -32,7 +45,7 @@ tasks:
     - id: task-1
       name: Create useMediaQuery Hook
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-1-create-usemediaquery-hook.md
       estimated_hours: 0.5
       completed_date: null
       notes: |
@@ -42,7 +55,7 @@ tasks:
     - id: task-2
       name: Create ReduxToastContainer Wrapper
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-2-create-redux-toast-container.md
       estimated_hours: 1
       completed_date: null
       notes: |
@@ -52,7 +65,7 @@ tasks:
     - id: task-3
       name: Create StandaloneToastContainer Wrapper
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-3-create-standalone-toast-container.md
       estimated_hours: 1
       completed_date: null
       notes: |
@@ -62,7 +75,7 @@ tasks:
     - id: task-4
       name: Create Rollup Build Configuration
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-4-create-rollup-config.md
       estimated_hours: 2
       completed_date: null
       notes: |
@@ -73,7 +86,7 @@ tasks:
     - id: task-5
       name: Update Index Exports
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-5-update-index-exports.md
       estimated_hours: 0.5
       completed_date: null
       notes: |
@@ -82,19 +95,50 @@ tasks:
     - id: task-6
       name: Build and Test
       status: not_started
-      file: agent/tasks/port-toasts.md
+      file: agent/tasks/task-6-build-and-test.md
       estimated_hours: 1
       completed_date: null
       notes: |
         Run npm install and npm run build.
         Verify dist/ directory is created correctly.
+  
+  milestone_2:
+    - id: task-7
+      name: Setup Storybook for Component Development
+      status: not_started
+      file: agent/tasks/task-7-storybook-setup.md
+      estimated_hours: 4
+      completed_date: null
+      notes: |
+        Interactive component documentation and development environment.
+        Includes stories for all components and variants.
+    
+    - id: task-8
+      name: Deploy Storybook to GitHub Pages
+      status: not_started
+      file: agent/tasks/task-8-github-pages-deployment.md
+      estimated_hours: 2
+      completed_date: null
+      notes: |
+        Automated deployment of Storybook to GitHub Pages for live demo.
+        Includes GitHub Actions workflow.
+    
+    - id: task-9
+      name: Cypress E2E Testing Against Storybook
+      status: not_started
+      file: agent/tasks/task-9-cypress-testing.md
+      estimated_hours: 5
+      completed_date: null
+      notes: |
+        Comprehensive E2E tests covering all interactions, accessibility,
+        and visual behavior. Tests run against Storybook.
 
 # Documentation tracking
 documentation:
-  design_documents: 0
+  design_documents: 1
   milestone_documents: 0
   pattern_documents: 0
-  task_documents: 1
+  task_documents: 10
   last_updated: 2026-02-14
 
 # Overall progress metrics
@@ -110,22 +154,33 @@ recent_work:
   - date: 2026-02-14
     description: |
       Initial ACP setup and project analysis. Reviewed all existing source files
-      and identified missing components needed to complete the library.
+      and identified missing components. Created comprehensive task documentation
+      for testing and documentation infrastructure.
     items:
       - ✅ Reviewed all source files (types, components, hooks, store)
       - ✅ Analyzed package.json configuration
       - ✅ Read task documentation
       - ✅ Created progress.yaml tracking file
-      - 📋 Identified 6 remaining tasks to complete the library
+      - ✅ Created requirements.md design document
+      - ✅ Created task-7-storybook-setup.md
+      - ✅ Created task-8-github-pages-deployment.md
+      - ✅ Created task-9-cypress-testing.md
+      - 📋 Identified 6 remaining tasks for M1 (core library)
+      - 📋 Identified 3 new tasks for M2 (testing & docs)
 
 # Next steps (prioritized list)
 next_steps:
+  - Complete Milestone 1 (M1) - Core Library Implementation
   - Create useMediaQuery hook for responsive behavior
   - Create ReduxToastContainer wrapper component
   - Create StandaloneToastContainer wrapper component
   - Create rollup.config.js for building the library
   - Update src/index.ts to export new components
   - Run build and verify output
+  - Then proceed to Milestone 2 (M2) - Testing & Documentation
+  - Setup Storybook with component stories
+  - Deploy Storybook to GitHub Pages
+  - Implement Cypress E2E tests
 
 # General notes and observations
 notes:
