@@ -15,11 +15,11 @@ Beautiful gradient toast notifications for React with Redux and standalone suppo
 ## Installation
 
 ```bash
-npm install pretty-toasts
+npm install @prmichaelsen/pretty-toasts
 # or
-yarn add pretty-toasts
+yarn add @prmichaelsen/pretty-toasts
 # or
-pnpm add pretty-toasts
+pnpm add @prmichaelsen/pretty-toasts
 ```
 
 ### Peer Dependencies
@@ -32,6 +32,36 @@ For Redux support (optional):
 ```bash
 npm install @reduxjs/toolkit react-redux
 ```
+
+### ⚠️ Tailwind CSS Configuration Required
+
+**This library uses Tailwind CSS classes and requires Tailwind to be configured in your project.**
+
+#### Tailwind v4 (Recommended)
+
+Add the `@source` directive to your CSS file:
+
+```css
+@import "tailwindcss";
+
+/* Scan pretty-toasts library */
+@source "../node_modules/@prmichaelsen/pretty-toasts/dist";
+```
+
+#### Tailwind v3 (Legacy)
+
+Add the library to your `tailwind.config.js`:
+
+```javascript
+export default {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@prmichaelsen/pretty-toasts/dist/**/*.{js,mjs}",
+  ],
+}
+```
+
+**Without this configuration, toasts will appear but have no colors or gradients.**
 
 ## Usage
 
