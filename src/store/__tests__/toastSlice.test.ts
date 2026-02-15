@@ -1,5 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import toastReducer, { addToast, removeToast, updateToast, pauseToast, resumeToast, makeToastPermanent } from '../toastSlice';
+import toastReducer, {
+  addToast,
+  removeToast,
+  updateToast,
+  pauseToast,
+  resumeToast,
+  makeToastPermanent,
+  clearAllToasts,
+  selectToasts,
+  selectActiveToasts
+} from '../toastSlice';
 import type { ToastState } from '../../types';
 
 interface RootState {
@@ -206,6 +216,69 @@ describe('toastSlice', () => {
 
       const state = store.getState().prettyToasts;
       expect(state.toasts[0].isPermanent).toBe(false);
+    });
+  });
+
+  describe('clearAllToasts', () => {
+    it('should clear all toasts', () => {
+      store.dispatch(addToast({ title: 'First', type: 'success' }));
+      store.dispatch(addToast({ title: 'Second', type: 'error' }));
+      store.dispatch(addToast({ title: 'Third', type: 'warning' }));
+
+      expect(store.getState().prettyToasts.toasts).toHaveLength(3);
+
+      store.dispatch(clearAllToasts());
+
+      const state = store.getState().prettyToasts;
+      expect(state.toasts).toEqual([]);
+    });
+
+    it('should work on empty state', () => {
+      store.dispatch(clearAllToasts());
+
+      const state = store.getState().prettyToasts;
+      expect(state.toasts).toEqual([]);
+    });
+  });
+
+  describe('selectors', () => {
+    beforeEach(() => {
+      store.dispatch(addToast({ title: 'Regular 1', type: 'success' }));
+      store.dispatch(addToast({ title: 'Regular 2', type: 'error' }));
+      store.dispatch(addToast({ title: 'Permanent', type: 'info' }));
+      
+      const state = store.getState().prettyToasts;
+      const permanentToastId = state.toasts[2].id;
+      store.dispatch(makeToastPermanent(permanentToastId));
+    });
+
+    it('selectToasts should return all toasts', () => {
+      const toasts = selectToasts(store.getState());
+      expect(toasts).toHaveLength(3);
+      expect(toasts[0].title).toBe('Regular 1');
+      expect(toasts[1].title).toBe('Regular 2');
+      expect(toasts[2].title).toBe('Permanent');
+    });
+
+    it('selectActiveToasts should return only non-permanent toasts', () => {
+      const activeToasts = selectActiveToasts(store.getState());
+      expect(activeToasts).toHaveLength(2);
+      expect(activeToasts[0].title).toBe('Regular 1');
+      expect(activeToasts[1].title).toBe('Regular 2');
+      expect(activeToasts.every(t => !t.isPermanent)).toBe(true);
+    });
+
+    it('selectActiveToasts should return all toasts when none are permanent', () => {
+      // Create a fresh store
+      const freshStore = configureStore({
+        reducer: { prettyToasts: toastReducer },
+      });
+      
+      freshStore.dispatch(addToast({ title: 'Toast 1', type: 'success' }));
+      freshStore.dispatch(addToast({ title: 'Toast 2', type: 'error' }));
+
+      const activeToasts = selectActiveToasts(freshStore.getState());
+      expect(activeToasts).toHaveLength(2);
     });
   });
 
