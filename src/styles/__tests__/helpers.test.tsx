@@ -2,9 +2,6 @@ import { renderHook } from '@testing-library/react';
 import {
   useToastBackgroundStyle,
   useProgressBarStyle,
-  getToastBackgroundStyle,
-  getProgressBarStyle,
-  getToastContainerStyle,
   toastCardStyle,
   toastContentStyle,
   toastTextStyle,
@@ -15,7 +12,6 @@ import {
   progressBarContainerStyle,
 } from '../helpers';
 import { ThemeProvider } from '../../hooks/ThemeContext';
-import type { ToastType } from '../../types';
 
 describe('Style Helpers', () => {
   const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -107,88 +103,6 @@ describe('Style Helpers', () => {
       const { result } = renderHook(() => useProgressBarStyle('success', 100), { wrapper });
       
       expect(result.current.width).toBe('100%');
-    });
-  });
-
-  describe('getToastBackgroundStyle (deprecated)', () => {
-    it('should return success gradient style', () => {
-      const style = getToastBackgroundStyle('success');
-      
-      expect(style.background).toContain('linear-gradient');
-      expect(style.background).toContain('rgb');
-      expect(style.opacity).toBeDefined();
-    });
-
-    it('should return error gradient style', () => {
-      const style = getToastBackgroundStyle('error');
-      
-      expect(style.background).toContain('linear-gradient');
-      expect(style.opacity).toBeDefined();
-    });
-
-    it('should return warning gradient style', () => {
-      const style = getToastBackgroundStyle('warning');
-      
-      expect(style.background).toContain('linear-gradient');
-      expect(style.opacity).toBeDefined();
-    });
-
-    it('should return info gradient style', () => {
-      const style = getToastBackgroundStyle('info');
-      
-      expect(style.background).toContain('linear-gradient');
-      expect(style.opacity).toBeDefined();
-    });
-  });
-
-  describe('getProgressBarStyle (deprecated)', () => {
-    it('should return correct width and gradient', () => {
-      const style = getProgressBarStyle('success', 50);
-      
-      expect(style.width).toBe('50%');
-      expect(style.background).toContain('linear-gradient');
-      expect(style.height).toBe('4px');
-      expect(style.transition).toContain('width');
-    });
-
-    it('should handle different toast types', () => {
-      const types: ToastType[] = ['success', 'error', 'warning', 'info'];
-      
-      types.forEach(type => {
-        const style = getProgressBarStyle(type, 75);
-        expect(style.width).toBe('75%');
-        expect(style.background).toContain('linear-gradient');
-      });
-    });
-  });
-
-  describe('getToastContainerStyle', () => {
-    it('should return desktop styles', () => {
-      const style = getToastContainerStyle(true);
-      
-      expect(style.position).toBe('fixed');
-      expect(style.bottom).toBe('1rem');
-      expect(style.right).toBe('1rem');
-      expect(style.left).toBe('auto');
-      expect(style.width).toBe('33vw');
-      expect(style.minWidth).toBe('320px');
-      expect(style.maxWidth).toBe('500px');
-      expect(style.zIndex).toBe(9999);
-      expect(style.pointerEvents).toBe('none');
-    });
-
-    it('should return mobile styles', () => {
-      const style = getToastContainerStyle(false);
-      
-      expect(style.position).toBe('fixed');
-      expect(style.bottom).toBe('1rem');
-      expect(style.right).toBe('0');
-      expect(style.left).toBe('0');
-      expect(style.width).toBe('100%');
-      expect(style.minWidth).toBe('auto');
-      expect(style.maxWidth).toBe('auto');
-      expect(style.zIndex).toBe(9999);
-      expect(style.pointerEvents).toBe('none');
     });
   });
 

@@ -45,48 +45,6 @@ export const useProgressBarStyle = (
   };
 };
 
-// Legacy exports for backward compatibility (deprecated)
-/** @deprecated Use useToastBackgroundStyle hook instead */
-export const getToastBackgroundStyle = (type: ToastType): React.CSSProperties => {
-  // This will use default theme since it's called outside React context
-  const gradient = toastGradients[type];
-  return {
-    background: `linear-gradient(to right, ${gradient.from}, ${gradient.to})`,
-    opacity: gradient.opacity,
-  };
-};
-
-/** @deprecated Use useProgressBarStyle hook instead */
-export const getProgressBarStyle = (
-  type: ToastType,
-  progress: number
-): React.CSSProperties => {
-  // This will use default theme since it's called outside React context
-  const gradient = progressBarGradients[type];
-  return {
-    width: `${progress}%`,
-    background: `linear-gradient(to right, ${gradient.from}, ${gradient.to})`,
-    height: '4px',
-    transition: 'width 100ms linear',
-  };
-};
-
-/**
- * Get toast container positioning style
- */
-export const getToastContainerStyle = (isDesktop: boolean): React.CSSProperties => {
-  return {
-    position: 'fixed',
-    bottom: '1rem',
-    right: isDesktop ? '1rem' : '0',
-    left: isDesktop ? 'auto' : '0',
-    width: isDesktop ? '33vw' : '100%',
-    minWidth: isDesktop ? '320px' : 'auto',
-    maxWidth: isDesktop ? '500px' : 'auto',
-    zIndex: 9999,
-    pointerEvents: 'none',
-  };
-};
 
 /**
  * Common toast card styles
