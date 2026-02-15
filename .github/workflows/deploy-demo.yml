@@ -27,7 +27,7 @@ jobs:
           node-version: '20'
 
       - name: Install library dependencies (no Storybook)
-        run: npm install --omit=dev --ignore-scripts
+        run: npm install --omit=dev --ignore-scripts --legacy-peer-deps
 
       - name: Build library
         run: npm run build
