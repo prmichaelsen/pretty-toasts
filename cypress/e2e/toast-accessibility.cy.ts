@@ -45,6 +45,8 @@ describe('Toast Accessibility', () => {
         .focus()
         .type('{enter}');
       
+      // Wait for exit animation
+      cy.wait(500);
       cy.get('[role="alert"]').should('not.exist');
     });
 
@@ -56,6 +58,8 @@ describe('Toast Accessibility', () => {
         .focus()
         .type(' ');
       
+      // Wait for exit animation
+      cy.wait(500);
       cy.get('[role="alert"]').should('not.exist');
     });
   });
