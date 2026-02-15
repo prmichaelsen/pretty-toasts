@@ -1,5 +1,13 @@
 # Pretty Toasts
 
+[![npm version](https://img.shields.io/npm/v/@prmichaelsen/pretty-toasts.svg)](https://www.npmjs.com/package/@prmichaelsen/pretty-toasts)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Unit Tests](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/test.yml/badge.svg)](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/test.yml)
+[![Deploy Demo](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/deploy-demo.yml/badge.svg)](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/deploy-demo.yml)
+[![codecov](https://codecov.io/gh/prmichaelsen/pretty-toasts/branch/mainline/graph/badge.svg)](https://codecov.io/gh/prmichaelsen/pretty-toasts)
+[![npm downloads](https://img.shields.io/npm/dm/@prmichaelsen/pretty-toasts.svg)](https://www.npmjs.com/package/@prmichaelsen/pretty-toasts)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@prmichaelsen/pretty-toasts)](https://bundlephobia.com/package/@prmichaelsen/pretty-toasts)
+
 Beautiful gradient toast notifications for React with Redux and standalone support.
 
 ## Live Demo
