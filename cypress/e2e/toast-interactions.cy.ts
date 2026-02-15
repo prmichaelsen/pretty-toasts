@@ -93,9 +93,8 @@ describe('Toast Interactions', () => {
       cy.clickButton('Short (2s)');
       cy.waitForToast().should('be.visible');
       
-      // Should disappear after 2 seconds + 300ms exit animation
-      cy.wait(3000);
-      cy.get('[role="alert"]').should('not.exist');
+      // Should disappear after 2 seconds + 300ms exit animation + buffer
+      cy.get('[role="alert"]', { timeout: 4000 }).should('not.exist');
     });
 
     it('shows toast with long duration', () => {
