@@ -5,12 +5,50 @@
 
 import React from 'react';
 import type { ToastType } from '../types';
+import type { PartialGradientConfig } from '../types/theme';
+import { useTheme } from '../hooks/ThemeContext';
 import { toastGradients, progressBarGradients } from './colors';
 
 /**
- * Get background gradient style for toast
+ * Hook to get background gradient style for toast
+ * Uses theme context for customizable colors
  */
+export const useToastBackgroundStyle = (
+  type: ToastType,
+  override?: PartialGradientConfig
+): React.CSSProperties => {
+  const { theme } = useTheme();
+  const gradient = override || theme.toast[type];
+  
+  return {
+    background: `linear-gradient(to right, ${gradient.from}, ${gradient.to})`,
+    opacity: gradient.opacity ?? 0.9,
+  };
+};
+
+/**
+ * Hook to get progress bar gradient style
+ * Uses theme context for customizable colors
+ */
+export const useProgressBarStyle = (
+  type: ToastType,
+  progress: number
+): React.CSSProperties => {
+  const { theme } = useTheme();
+  const gradient = theme.progressBar[type];
+  
+  return {
+    width: `${progress}%`,
+    background: `linear-gradient(to right, ${gradient.from}, ${gradient.to})`,
+    height: '4px',
+    transition: 'width 100ms linear',
+  };
+};
+
+// Legacy exports for backward compatibility (deprecated)
+/** @deprecated Use useToastBackgroundStyle hook instead */
 export const getToastBackgroundStyle = (type: ToastType): React.CSSProperties => {
+  // This will use default theme since it's called outside React context
   const gradient = toastGradients[type];
   return {
     background: `linear-gradient(to right, ${gradient.from}, ${gradient.to})`,
@@ -18,13 +56,12 @@ export const getToastBackgroundStyle = (type: ToastType): React.CSSProperties =>
   };
 };
 
-/**
- * Get progress bar gradient style
- */
+/** @deprecated Use useProgressBarStyle hook instead */
 export const getProgressBarStyle = (
   type: ToastType,
   progress: number
 ): React.CSSProperties => {
+  // This will use default theme since it's called outside React context
   const gradient = progressBarGradients[type];
   return {
     width: `${progress}%`,

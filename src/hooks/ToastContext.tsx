@@ -1,5 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { Toast, ToastOptions, ToastActions } from '../types';
+import type { CompleteTheme } from '../types/theme';
+import { ThemeProvider } from './ThemeContext';
 
 interface ToastContextValue extends ToastActions {
   toasts: Toast[];
@@ -7,7 +9,12 @@ interface ToastContextValue extends ToastActions {
 
 const ToastContext = createContext<ToastContextValue | undefined>(undefined);
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface ToastProviderProps {
+  children: React.ReactNode;
+  theme?: CompleteTheme;
+}
+
+export const ToastProvider: React.FC<ToastProviderProps> = ({ children, theme }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const addToast = useCallback((options: ToastOptions) => {
@@ -79,7 +86,11 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     clearAllToasts,
   }), [toasts, addToast, updateToast, removeToast, pauseToast, resumeToast, makeToastPermanent, clearAllToasts]);
 
-  return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
+    </ThemeProvider>
+  );
 };
 
 export const useToastContext = (): ToastContextValue => {

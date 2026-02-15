@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { Toast as ToastType } from "../types";
-import { getToastBackgroundStyle, getProgressBarStyle } from "../styles/helpers";
+import { useToastBackgroundStyle, useProgressBarStyle } from "../styles/helpers";
 
 interface ToastProps {
   toast: ToastType;
@@ -173,8 +173,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
     handleMouseLeave();
   }, [handleMouseLeave]);
 
-  const backgroundStyle = getToastBackgroundStyle(toast.type);
-  const progressStyle = getProgressBarStyle(toast.type, progress);
+  const backgroundStyle = useToastBackgroundStyle(toast.type);
+  const progressStyle = useProgressBarStyle(toast.type, progress);
 
   return (
     <div

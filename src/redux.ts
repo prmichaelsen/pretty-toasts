@@ -9,6 +9,19 @@
 export type { ToastType, ToastOptions, ToastState, ToastActions } from './types';
 export type { Toast as ToastObject } from './types';
 
+// Theme Types
+/**
+ * Theme types for customizing toast gradients
+ */
+export type {
+  GradientConfig,
+  PartialGradientConfig,
+  ToastTheme,
+  ProgressBarTheme,
+  CompleteTheme,
+  ResolvedTheme,
+} from './types/theme';
+
 // Core Components
 export { Toast } from './components/Toast';
 export { ToastContainer } from './components/ToastContainer';
