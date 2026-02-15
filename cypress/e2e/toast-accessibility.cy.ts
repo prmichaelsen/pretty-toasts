@@ -5,22 +5,22 @@ describe('Toast Accessibility', () => {
 
   describe('ARIA Attributes', () => {
     it('has proper role="alert" on toasts', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       cy.get('[role="alert"]').should('exist');
     });
 
     it('has aria-live="polite" on container', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       cy.get('[aria-live="polite"]').should('exist');
     });
 
     it('has aria-label on dismiss button', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       cy.get('button[aria-label="Dismiss notification"]').should('exist');
     });
 
     it('has proper aria-label text', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       cy.get('button[aria-label="Dismiss notification"]')
         .should('have.attr', 'aria-label', 'Dismiss notification');
     });
@@ -28,7 +28,7 @@ describe('Toast Accessibility', () => {
 
   describe('Keyboard Navigation', () => {
     it('can focus dismiss button with keyboard', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       // Tab to the dismiss button
       cy.get('button[aria-label="Dismiss notification"]')
@@ -38,7 +38,7 @@ describe('Toast Accessibility', () => {
     });
 
     it('can dismiss toast with Enter key', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       cy.get('button[aria-label="Dismiss notification"]')
         .first()
@@ -49,7 +49,7 @@ describe('Toast Accessibility', () => {
     });
 
     it('can dismiss toast with Space key', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       cy.get('button[aria-label="Dismiss notification"]')
         .first()
@@ -62,7 +62,7 @@ describe('Toast Accessibility', () => {
 
   describe('Screen Reader Support', () => {
     it('announces toast content', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       cy.get('[role="alert"]')
         .should('contain', 'Success!')
@@ -70,7 +70,7 @@ describe('Toast Accessibility', () => {
     });
 
     it('provides accessible text for all toast types', () => {
-      const types = ['Success', 'Error', 'Warning', 'Info'];
+      const types = ['Success Toast', 'Error Toast', 'Warning Toast', 'Info Toast'];
       
       types.forEach((type) => {
         cy.clickButton(type);
@@ -85,7 +85,7 @@ describe('Toast Accessibility', () => {
 
   describe('Visual Indicators', () => {
     it('has visible focus indicator on dismiss button', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       cy.get('button[aria-label="Dismiss notification"]')
         .first()
@@ -96,7 +96,7 @@ describe('Toast Accessibility', () => {
     });
 
     it('maintains sufficient color contrast', () => {
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       // Toast should be visible with good contrast
       cy.get('[role="alert"]')
@@ -107,17 +107,17 @@ describe('Toast Accessibility', () => {
 
   describe('Multiple Toasts Accessibility', () => {
     it('maintains proper ARIA structure with multiple toasts', () => {
-      cy.clickButton('Success');
-      cy.clickButton('Error');
-      cy.clickButton('Warning');
+      cy.clickButton('Success Toast');
+      cy.clickButton('Error Toast');
+      cy.clickButton('Warning Toast');
       
       cy.get('[role="alert"]').should('have.length', 3);
       cy.get('[aria-live="polite"]').should('have.length', 1);
     });
 
     it('allows keyboard navigation through multiple toasts', () => {
-      cy.clickButton('Success');
-      cy.clickButton('Error');
+      cy.clickButton('Success Toast');
+      cy.clickButton('Error Toast');
       
       // Should be able to tab through dismiss buttons
       cy.get('button[aria-label="Dismiss notification"]')
@@ -132,7 +132,7 @@ describe('Toast Accessibility', () => {
     it('respects prefers-reduced-motion', () => {
       // Note: Cypress doesn't easily test prefers-reduced-motion
       // but we can verify animations are present
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       cy.get('[role="alert"]')
         .should('be.visible')
@@ -143,7 +143,7 @@ describe('Toast Accessibility', () => {
   describe('Touch Accessibility', () => {
     it('has sufficient touch target size on mobile', () => {
       cy.viewport('iphone-x');
-      cy.clickButton('Success');
+      cy.clickButton('Success Toast');
       
       // Dismiss button should be large enough for touch
       cy.get('button[aria-label="Dismiss notification"]')
