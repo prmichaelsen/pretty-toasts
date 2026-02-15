@@ -166,7 +166,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
       aria-live="polite"
       aria-label="Notifications"
     >
-      <div className="relative w-full" style={{ pointerEvents: "auto" }}>
+      <div style={{ position: 'relative', width: '100%', pointerEvents: "auto" }}>
         {animatedToasts.map((toast) => {
           const getTransform = () => {
             const yTransform = `translateY(-${toast.yPosition || 0}px)`;
@@ -193,8 +193,11 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
                 if (el) toastRefs.current.set(toast.id, el);
                 else toastRefs.current.delete(toast.id);
               }}
-              className="absolute bottom-0 left-0 w-full"
               style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
                 transform: getTransform(),
                 opacity: getOpacity(),
                 transition:

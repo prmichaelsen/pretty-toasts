@@ -33,35 +33,9 @@ For Redux support (optional):
 npm install @reduxjs/toolkit react-redux
 ```
 
-### ⚠️ Tailwind CSS Configuration Required
+### ✅ Zero Configuration Required
 
-**This library uses Tailwind CSS classes and requires Tailwind to be configured in your project.**
-
-#### Tailwind v4 (Recommended)
-
-Add the `@source` directive to your CSS file:
-
-```css
-@import "tailwindcss";
-
-/* Scan pretty-toasts library */
-@source "../node_modules/@prmichaelsen/pretty-toasts/dist";
-```
-
-#### Tailwind v3 (Legacy)
-
-Add the library to your `tailwind.config.js`:
-
-```javascript
-export default {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@prmichaelsen/pretty-toasts/dist/**/*.{js,mjs}",
-  ],
-}
-```
-
-**Without this configuration, toasts will appear but have no colors or gradients.**
+**This library works out of the box with no CSS configuration needed!** All styles are included as inline styles, so you don't need Tailwind CSS or any other CSS framework.
 
 ## Usage
 
@@ -214,18 +188,9 @@ dispatch(updateToast({
 
 ## Styling
 
-The library uses Tailwind CSS classes. Make sure your project has Tailwind configured, or the toasts will not be styled correctly.
+The library uses inline styles with beautiful gradient colors. No CSS configuration is required - it works out of the box!
 
-Required Tailwind config:
-```javascript
-module.exports = {
-  content: [
-    './node_modules/pretty-toasts/**/*.{js,ts,jsx,tsx}',
-    // ... your other content paths
-  ],
-  // ... rest of config
-};
-```
+All toast styles are self-contained, so you can use this library with any CSS framework (or none at all).
 
 ## License
 

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { Toast as ToastType } from "../types";
+import { getToastBackgroundStyle, getProgressBarStyle } from "../styles/helpers";
 
 interface ToastProps {
   toast: ToastType;
@@ -9,7 +10,7 @@ interface ToastProps {
 }
 
 export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMakePermanent }) => {
-  const removeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const removeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [progress, setProgress] = useState(toast.progress || 0);
   const [isPaused, setIsPaused] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
@@ -160,70 +161,48 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
     };
   }, []);
 
-  const getGradientClasses = () => {
-    switch (toast.type) {
-      case "success":
-        return "bg-gradient-to-r from-purple-500/90 to-indigo-500/90";
-      case "error":
-        return "bg-gradient-to-r from-purple-500/90 to-rose-500/90";
-      case "warning":
-        return "bg-gradient-to-r from-amber-500/90 to-orange-500/90";
-      case "info":
-        return "bg-gradient-to-r from-blue-500/90 to-purple-500/90";
-      default:
-        return "bg-gradient-to-r from-blue-500/90 to-indigo-500/90";
-    }
-  };
+  const [isHovered, setIsHovered] = useState(false);
 
-  const getProgressGradientClasses = () => {
-    switch (toast.type) {
-      case "success":
-        return "bg-gradient-to-r from-purple-400 to-indigo-400";
-      case "error":
-        return "bg-gradient-to-r from-purple-400 to-rose-400";
-      case "warning":
-        return "bg-gradient-to-r from-amber-400 to-orange-400";
-      case "info":
-        return "bg-gradient-to-r from-blue-400 to-purple-400";
-      default:
-        return "bg-gradient-to-r from-blue-400 to-indigo-400";
-    }
-  };
+  const handleMouseEnterWrapper = useCallback(() => {
+    setIsHovered(true);
+    handleMouseEnter();
+  }, [handleMouseEnter]);
+
+  const handleMouseLeaveWrapper = useCallback(() => {
+    setIsHovered(false);
+    handleMouseLeave();
+  }, [handleMouseLeave]);
+
+  const backgroundStyle = getToastBackgroundStyle(toast.type);
+  const progressStyle = getProgressBarStyle(toast.type, progress);
 
   return (
     <div
-      className={`
-        transform transition-all duration-300 ease-in-out
-        ${
-          isExiting
-            ? "translate-x-full opacity-0 scale-95"
-            : "translate-x-0 opacity-100 scale-100"
-        }
-      `}
+      style={{
+        transform: isExiting ? 'translateX(100%) scale(0.95)' : 'translateX(0) scale(1)',
+        opacity: isExiting ? 0 : 1,
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
     >
       <div
-        className={`
-          ${getGradientClasses()}
-          backdrop-blur-sm
-          rounded-lg
-          p-4
-          shadow-lg
-          ${toast.isPermanent ? "cursor-default" : "cursor-pointer"}
-          transition-all
-          duration-200
-          hover:shadow-xl
-          hover:scale-105
-          w-full
-          relative
-          overflow-hidden
-          ${isDragging ? "cursor-grabbing" : "cursor-grab"}
-        `}
         style={{
-          transform: `translateX(${swipeOffset}px)`,
+          ...backgroundStyle,
+          backdropFilter: 'blur(4px)',
+          borderRadius: '0.5rem',
+          padding: '1rem',
+          boxShadow: isHovered
+            ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+            : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          cursor: toast.isPermanent ? 'default' : isDragging ? 'grabbing' : 'grab',
+          transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: `translateX(${swipeOffset}px) scale(${isHovered ? 1.05 : 1})`,
           opacity: Math.max(0.3, 1 - swipeOffset / 200),
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden',
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleMouseEnterWrapper}
+        onMouseLeave={handleMouseLeaveWrapper}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -233,14 +212,23 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
         role="alert"
         aria-live="polite"
       >
-        <div className="flex items-start space-x-3">
-          <div className="flex-1 min-w-0">
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             {toast.title && (
-              <p className="text-sm font-semibold text-white mb-1">
+              <p style={{
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                color: '#ffffff',
+                marginBottom: '0.25rem',
+              }}>
                 {toast.title}
               </p>
             )}
-            <p className="text-sm text-white/90 leading-relaxed">
+            <p style={{
+              fontSize: '0.875rem',
+              color: 'rgba(255, 255, 255, 0.9)',
+              lineHeight: 1.625,
+            }}>
               {toast.message}
             </p>
           </div>
@@ -249,11 +237,22 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
               e.stopPropagation();
               handleRemove();
             }}
-            className="flex-shrink-0 p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
+            style={{
+              flexShrink: 0,
+              padding: '0.25rem',
+              backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+              borderRadius: '9999px',
+              transition: 'background-color 200ms',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             aria-label="Dismiss notification"
           >
             <svg
-              className="w-4 h-4 text-white"
+              style={{ width: '1rem', height: '1rem', color: '#ffffff' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -269,11 +268,15 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
         </div>
 
         {/* Progress bar fixed to bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/30">
-          <div
-            className={`h-full ${getProgressGradientClasses()} transition-all duration-100 ease-linear`}
-            style={{ width: `${progress}%` }}
-          />
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '4px',
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        }}>
+          <div style={progressStyle} />
         </div>
       </div>
     </div>

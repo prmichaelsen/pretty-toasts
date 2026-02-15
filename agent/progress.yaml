@@ -3,7 +3,7 @@
 
 project:
   name: pretty-toasts
-  version: 1.0.0
+  version: 2.1.4
   started: 2026-02-14
   status: in_progress
   current_milestone: M2
@@ -162,6 +162,26 @@ progress:
 
 # Recent work log (most recent first)
 recent_work:
+  - date: 2026-02-15
+    description: |
+      🎉 TASK 10 COMPLETE! Removed Tailwind CSS dependency. Library now works with zero CSS configuration!
+    items:
+      - ✅ Updated Toast.tsx to use inline styles instead of Tailwind classes
+      - ✅ Updated ToastContainer.tsx to remove all Tailwind classes
+      - ✅ Removed tailwindcss, autoprefixer, postcss, rollup-plugin-postcss from package.json
+      - ✅ Updated README.md - removed Tailwind configuration requirements
+      - ✅ Build successful - CJS 27KB, ESM 26KB, all gradients preserved
+      - 🎯 Major DX improvement - zero configuration required!
+
+  - date: 2026-02-15
+    description: |
+      ACP initialization completed. Reviewed all agent files, project structure, and current state.
+    items:
+      - ✅ Checked for ACP updates - AGENT.md is up to date (v1.0.3)
+      - ✅ Read all agent files and key source files
+      - ✅ Analyzed project state: M1 complete (100%), M2 in progress (40%)
+      - ✅ Identified blocker: Storybook infinite loading (Vite 7 incompatibility)
+
   - date: 2026-02-14
     description: |
       🎉 MILESTONE 1 COMPLETE! Implemented all remaining core library components,
