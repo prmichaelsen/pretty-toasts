@@ -56,6 +56,14 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prmichaelsen/pretty-toasts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prmichaelsen/pretty-toasts/issues"
+  },
+  "homepage": "https://github.com/prmichaelsen/pretty-toasts#readme",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
