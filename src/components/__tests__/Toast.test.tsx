@@ -162,8 +162,8 @@ describe('Toast', () => {
       });
       fireEvent.touchEnd(toastElement);
       
-      // Verify no crash (RAF makes this async, so we can't easily test the callback)
-      expect(toastElement).toBeTruthy();
+      // Should remove toast (swipe > 100px)
+      expect(mockOnRemove).toHaveBeenCalled();
     });
 
     it('should handle mouse down', () => {
