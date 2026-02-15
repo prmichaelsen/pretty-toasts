@@ -20,8 +20,8 @@ export const defaultToastTheme: Record<'success' | 'error' | 'warning' | 'info',
     opacity: 0.9,
   },
   warning: {
-    from: 'rgb(168, 85, 247)',  // purple-500
-    to: 'rgb(249, 115, 22)',    // orange-500
+    from: 'rgb(249, 115, 22)',    // orange-500
+    to: 'rgb(168, 85, 247)',  // purple-500
     opacity: 0.9,
   },
   info: {
@@ -44,8 +44,8 @@ export const defaultProgressBarTheme: Record<'success' | 'error' | 'warning' | '
     to: 'rgb(251, 113, 133)',    // rose-400
   },
   warning: {
-    from: 'rgb(192, 132, 252)',  // purple-400
-    to: 'rgb(251, 146, 60)',     // orange-400
+    from: 'rgb(251, 146, 60)',     // orange-400
+    to: 'rgb(192, 132, 252)',  // purple-400
   },
   info: {
     from: 'rgb(96, 165, 250)',   // blue-400
