@@ -18,8 +18,6 @@ Beautiful gradient toast notifications for React with Redux and standalone suppo
 
 ## Installation
 
-![Toast Demo](images/toast_demo.gif)
-
 ```bash
 npm install @prmichaelsen/pretty-toasts
 # or
@@ -27,6 +25,8 @@ yarn add @prmichaelsen/pretty-toasts
 # or
 pnpm add @prmichaelsen/pretty-toasts
 ```
+
+![Toast Demo](images/toast_demo.gif)
 
 ### Peer Dependencies
 
