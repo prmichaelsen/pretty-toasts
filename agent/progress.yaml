@@ -31,18 +31,20 @@ milestones:
   - id: M2
     name: Testing & Documentation
     status: in_progress
-    progress: 55
+    progress: 60
     started: 2026-02-14
     completed: null
     estimated_weeks: 1
-    tasks_completed: 3
-    tasks_total: 6
+    tasks_completed: 4
+    tasks_total: 8
     notes: |
       Task 12 COMPLETE: GitHub Pages demo created with beautiful gradient styling.
       Task 13 COMPLETE: Fixed toast stacking and positioning bugs (v3.0.1, v3.0.2).
       Task 14 COMPLETE: Fixed React setState warning (v3.0.4).
+      Task 15 COMPLETE: Reorganized demos into standalone and redux examples.
+      Task 16 ADDED: Verify stacking fix works in upstream project (agentbase.me).
       
-      Storybook still blocked by Vite 7 incompatibility (may skip in favor of GitHub Pages demo).
+      Storybook still blocked by Vite 7 incompatibility (may skip in favor of demos).
 
 # Tasks are granular work items within milestones
 tasks:
@@ -225,7 +227,7 @@ documentation:
   design_documents: 1
   milestone_documents: 0
   pattern_documents: 0
-  task_documents: 14
+  task_documents: 16
   last_updated: 2026-02-15
 
 # Overall progress metrics
@@ -238,6 +240,20 @@ progress:
 
 # Recent work log (most recent first)
 recent_work:
+  - date: 2026-02-15
+    description: |
+      🎉 TASK 15 COMPLETE! Reorganized demos into standalone and redux examples
+    items:
+      - ✅ Renamed demo/ to demos/standalone/
+      - ✅ Created demos/redux/ with Redux Toolkit integration
+      - ✅ Both demos showcase identical features with different state management
+      - ✅ Created demos/README.md with usage instructions
+      - ✅ Updated root package.json scripts (demo:standalone, demo:redux, demo:build, demo:install)
+      - ✅ Updated GitHub Actions workflow to use demos/standalone/
+      - ✅ Both demos build successfully (standalone: 160KB, redux: 183KB)
+      - ✅ Committed and pushed to mainline
+      - 📚 Complete working examples for both integration patterns!
+
   - date: 2026-02-15
     description: |
       🎉 TASK 14 COMPLETE! Fixed React setState warning (v3.0.4)
