@@ -242,6 +242,16 @@ progress:
 recent_work:
   - date: 2026-02-15
     description: |
+      🔧 Fixed GitHub Actions workflow - added --legacy-peer-deps flag
+    items:
+      - ✅ Fixed npm install conflict with Storybook peer dependencies
+      - ✅ Added --legacy-peer-deps flag to bypass version conflicts
+      - ✅ Workflow now installs library dependencies without Storybook
+      - ✅ Committed and pushed fix (commit 6df476b)
+      - 🚀 GitHub Actions should now deploy successfully!
+
+  - date: 2026-02-15
+    description: |
       🎉 TASK 15 COMPLETE! Reorganized demos into standalone and redux examples
     items:
       - ✅ Renamed demo/ to demos/standalone/
