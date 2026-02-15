@@ -3,7 +3,7 @@
 
 project:
   name: pretty-toasts
-  version: 3.0.1
+  version: 3.0.4
   started: 2026-02-14
   status: in_progress
   current_milestone: M2
@@ -31,16 +31,16 @@ milestones:
   - id: M2
     name: Testing & Documentation
     status: in_progress
-    progress: 50
+    progress: 55
     started: 2026-02-14
     completed: null
     estimated_weeks: 1
-    tasks_completed: 2
+    tasks_completed: 3
     tasks_total: 6
     notes: |
       Task 12 COMPLETE: GitHub Pages demo created with beautiful gradient styling.
       Task 13 COMPLETE: Fixed toast stacking and positioning bugs (v3.0.1, v3.0.2).
-      Task 14 ADDED: Fix React setState warning in Toast component.
+      Task 14 COMPLETE: Fixed React setState warning (v3.0.4).
       
       Storybook still blocked by Vite 7 incompatibility (may skip in favor of GitHub Pages demo).
 
@@ -204,13 +204,28 @@ tasks:
         ✅ Build successful - v3.0.1 released
         ✅ CHANGELOG.md created with version history
         🎉 Toast stacking now works correctly!
+    
+    - id: task-14
+      name: Fix React setState Warning
+      status: completed
+      file: agent/tasks/task-14-fix-react-setstate-warning.md
+      estimated_hours: 2
+      completed_date: 2026-02-15
+      priority: medium
+      notes: |
+        ✅ FIXED! Root cause: handleRemove() called in setProgress callback during render
+        ✅ Deferred handleRemove() to next tick using setTimeout(..., 0)
+        ✅ Prevents setState during render in auto-dismiss logic
+        ✅ Build successful - v3.0.4 released
+        ✅ Updated CHANGELOG.md
+        🐛 Console warning eliminated!
 
 # Documentation tracking
 documentation:
   design_documents: 1
   milestone_documents: 0
   pattern_documents: 0
-  task_documents: 13
+  task_documents: 14
   last_updated: 2026-02-15
 
 # Overall progress metrics
@@ -223,6 +238,18 @@ progress:
 
 # Recent work log (most recent first)
 recent_work:
+  - date: 2026-02-15
+    description: |
+      🎉 TASK 14 COMPLETE! Fixed React setState warning (v3.0.4)
+    items:
+      - ✅ Identified root cause: handleRemove() called in setProgress callback
+      - ✅ Fixed by deferring handleRemove() to next tick with setTimeout(..., 0)
+      - ✅ Prevents setState during render in Toast auto-dismiss logic
+      - ✅ Build successful - v3.0.4 released
+      - ✅ Updated CHANGELOG.md
+      - ✅ No breaking changes - all functionality preserved
+      - 🐛 Console warning eliminated!
+
   - date: 2026-02-15
     description: |
       🎉 TASK 12 COMPLETE! Created beautiful GitHub Pages interactive demo!
