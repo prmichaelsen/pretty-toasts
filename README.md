@@ -2,6 +2,10 @@
 
 Beautiful gradient toast notifications for React with Redux and standalone support.
 
+## Live Demo
+
+🎮 **Try the interactive demo**: [https://prmichaelsen.github.io/pretty-toasts/](https://prmichaelsen.github.io/pretty-toasts/)
+
 ## Features
 
 - 🎨 **Beautiful Gradient Styling** - Purple/indigo for success, purple/rose for error, amber/orange for warning, blue/purple for info
