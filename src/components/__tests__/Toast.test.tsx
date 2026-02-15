@@ -110,15 +110,92 @@ describe('Toast', () => {
       const { container } = renderToast();
       const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
       fireEvent.touchStart(toastElement, {
-        touches: [{ clientY: 100 }],
+        touches: [{ clientX: 100 }],
       });
       expect(toastElement).toBeTruthy();
+    });
+
+    it('should handle touch move after touch start', () => {
+      const { container } = renderToast();
+      const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
+      
+      // Start touch
+      fireEvent.touchStart(toastElement, {
+        touches: [{ clientX: 100 }],
+      });
+      
+      // Move touch to the right
+      fireEvent.touchMove(toastElement, {
+        touches: [{ clientX: 200 }],
+      });
+      
+      expect(toastElement).toBeTruthy();
+    });
+
+    it('should handle touch end with small swipe', () => {
+      const { container } = renderToast();
+      const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
+      
+      // Start and move touch (small swipe)
+      fireEvent.touchStart(toastElement, {
+        touches: [{ clientX: 100 }],
+      });
+      fireEvent.touchMove(toastElement, {
+        touches: [{ clientX: 150 }],
+      });
+      fireEvent.touchEnd(toastElement);
+      
+      // Should not remove toast (swipe < 100px)
+      expect(mockOnRemove).not.toHaveBeenCalled();
+    });
+
+    it('should handle touch end with large swipe', () => {
+      const { container } = renderToast();
+      const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
+      
+      // Start and move touch (large swipe)
+      fireEvent.touchStart(toastElement, {
+        touches: [{ clientX: 100 }],
+      });
+      fireEvent.touchMove(toastElement, {
+        touches: [{ clientX: 250 }],
+      });
+      fireEvent.touchEnd(toastElement);
+      
+      // Should remove toast (swipe > 100px)
+      expect(mockOnRemove).toHaveBeenCalled();
     });
 
     it('should handle mouse down', () => {
       const { container } = renderToast();
       const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
-      fireEvent.mouseDown(toastElement, { clientY: 100 });
+      fireEvent.mouseDown(toastElement, { clientX: 100 });
+      expect(toastElement).toBeTruthy();
+    });
+
+    it('should handle mouse move after mouse down', () => {
+      const { container } = renderToast();
+      const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
+      
+      // Start drag
+      fireEvent.mouseDown(toastElement, { clientX: 100 });
+      
+      // Move mouse with left button pressed
+      fireEvent.mouseMove(toastElement, { clientX: 200, buttons: 1 });
+      
+      expect(toastElement).toBeTruthy();
+    });
+
+    it('should handle mouse up after drag', () => {
+      const { container } = renderToast();
+      const toastElement = container.querySelector('div[role="alert"]') as HTMLElement;
+      
+      // Start, move, and end drag
+      fireEvent.mouseDown(toastElement, { clientX: 100 });
+      fireEvent.mouseMove(toastElement, { clientX: 150, buttons: 1 });
+      fireEvent.mouseUp(toastElement);
+      
+      // Verify no crash
       expect(toastElement).toBeTruthy();
     });
   });
