@@ -31,19 +31,20 @@ milestones:
   - id: M2
     name: Testing & Documentation
     status: in_progress
-    progress: 60
+    progress: 70
     started: 2026-02-14
     completed: null
     estimated_weeks: 1
-    tasks_completed: 4
-    tasks_total: 8
+    tasks_completed: 6
+    tasks_total: 9
     notes: |
       Task 12 COMPLETE: GitHub Pages demo created with beautiful gradient styling.
       Task 13 COMPLETE: Fixed toast stacking and positioning bugs (v3.0.1, v3.0.2).
       Task 14 COMPLETE: Fixed React setState warning (v3.0.4).
       Task 15 COMPLETE: Reorganized demos into standalone and redux examples.
-      Task 16 ADDED: Verify stacking fix works in upstream project (agentbase.me).
+      Task 17 COMPLETE: GitHub Pages enabled and demo deployed successfully!
       
+      Task 16 PENDING: Verify stacking fix works in upstream project (agentbase.me).
       Storybook still blocked by Vite 7 incompatibility (may skip in favor of demos).
 
 # Tasks are granular work items within milestones
@@ -221,13 +222,55 @@ tasks:
         ✅ Build successful - v3.0.4 released
         ✅ Updated CHANGELOG.md
         🐛 Console warning eliminated!
+    
+    - id: task-15
+      name: Reorganize Demos into Standalone and Redux Examples
+      status: completed
+      file: agent/tasks/task-15-reorganize-demos.md
+      estimated_hours: 3
+      completed_date: 2026-02-15
+      priority: medium
+      notes: |
+        ✅ Renamed demo/ to demos/standalone/
+        ✅ Created demos/redux/ with Redux Toolkit integration
+        ✅ Both demos showcase identical features
+        ✅ Created demos/README.md with usage instructions
+        ✅ Updated root package.json scripts
+        ✅ Updated GitHub Actions workflow
+        📚 Complete working examples for both integration patterns!
+    
+    - id: task-16
+      name: Verify Stacking Fix in Upstream Project
+      status: not_started
+      file: agent/tasks/task-16-verify-stacking-fix-upstream.md
+      estimated_hours: 1
+      completed_date: null
+      priority: low
+      notes: |
+        Verify that the toast stacking fix works in the upstream agentbase.me project.
+        This is a verification task, not a code change.
+    
+    - id: task-17
+      name: Enable GitHub Pages for Demo Deployment
+      status: completed
+      file: agent/tasks/task-17-enable-github-pages.md
+      estimated_hours: 0.5
+      completed_date: 2026-02-15
+      priority: high
+      notes: |
+        ✅ GitHub Pages enabled in repository settings
+        ✅ Source set to "GitHub Actions"
+        ✅ Workflow runs successfully with --legacy-peer-deps
+        ✅ Demo accessible at https://prmichaelsen.github.io/pretty-toasts/
+        ✅ All features tested and working
+        🚀 Demo deploys automatically on push to mainline!
 
 # Documentation tracking
 documentation:
   design_documents: 1
   milestone_documents: 0
   pattern_documents: 0
-  task_documents: 16
+  task_documents: 17
   last_updated: 2026-02-15
 
 # Overall progress metrics
@@ -242,13 +285,30 @@ progress:
 recent_work:
   - date: 2026-02-15
     description: |
-      🔧 Fixed GitHub Actions workflow - added --legacy-peer-deps flag
+      🎉 TASK 17 COMPLETE! GitHub Pages enabled and demo deployed successfully!
+    items:
+      - ✅ GitHub Pages enabled in repository settings
+      - ✅ Source configured to use "GitHub Actions"
+      - ✅ Workflow runs successfully with --legacy-peer-deps flag
+      - ✅ Demo verified accessible at https://prmichaelsen.github.io/pretty-toasts/
+      - ✅ All toast features working correctly
+      - ✅ No console errors
+      - ✅ Mobile responsive
+      - ✅ Updated task-17 documentation with completion notes
+      - ✅ Updated progress.yaml with M2 progress (70%, 6/9 tasks complete)
+      - 🚀 Demo deploys automatically on every push to mainline!
+
+  - date: 2026-02-15
+    description: |
+      🔧 Fixed GitHub Actions workflow - multiple iterations to resolve dependencies
     items:
       - ✅ Fixed npm install conflict with Storybook peer dependencies
       - ✅ Added --legacy-peer-deps flag to bypass version conflicts
-      - ✅ Workflow now installs library dependencies without Storybook
-      - ✅ Committed and pushed fix (commit 6df476b)
-      - 🚀 GitHub Actions should now deploy successfully!
+      - ✅ Tried --production flag but rollup was missing
+      - ✅ Final solution: npm install --legacy-peer-deps (all deps)
+      - ✅ Workflow now builds library and demo successfully
+      - ✅ Committed fixes (commits 6df476b, cef9cf6, d50eabb)
+      - 🚀 GitHub Actions deploys successfully!
 
   - date: 2026-02-15
     description: |
