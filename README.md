@@ -26,6 +26,7 @@ yarn add @prmichaelsen/pretty-toasts
 pnpm add @prmichaelsen/pretty-toasts
 ```
 
+### Preview
 ![Toast Demo](images/toast_demo.gif)
 
 ### Peer Dependencies
