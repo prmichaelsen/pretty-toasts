@@ -24,15 +24,18 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   const [animatedToasts, setAnimatedToasts] = useState<AnimatedToast[]>([]);
   const toastRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-  // Calculate Y positions for all toasts
+  // Calculate Y positions for all toasts (excluding exiting toasts)
   const calculatePositions = useCallback((toastList: AnimatedToast[]) => {
     let currentY = 0;
     return toastList.map((toast) => {
       const element = toastRefs.current.get(toast.id);
       const height = element ? element.offsetHeight : 80; // fallback height
 
-      const yPosition = currentY;
-      currentY += height + 12; // 12px gap
+      // Only increment position for non-exiting toasts
+      const yPosition = toast.isExiting ? toast.yPosition || 0 : currentY;
+      if (!toast.isExiting) {
+        currentY += height + 12; // 12px gap
+      }
 
       return {
         ...toast,
