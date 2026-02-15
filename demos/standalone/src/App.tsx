@@ -125,7 +125,16 @@ function App() {
           Toast Test Page (Standalone)
         </h1>
         <p style={{ color: '#cbd5e1', marginBottom: '2rem' }}>
-          Test the @prmichaelsen/pretty-toasts library with React Context
+          Test the 
+          <a
+            href="https://github.com/prmichaelsen/pretty-toasts"
+            style={{ color: '#60a5fa', textDecoration: 'none' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @prmichaelsen/pretty-toasts
+          </a>
+          library with React Context
         </p>
 
         <div style={{
