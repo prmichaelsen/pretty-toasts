@@ -14,6 +14,8 @@ Beautiful gradient toast notifications for React with Redux and standalone suppo
 
 ## Installation
 
+![Toast Demo](images/toast_demo.gif)
+
 ```bash
 npm install @prmichaelsen/pretty-toasts
 # or
@@ -184,6 +186,67 @@ dispatch(updateToast({
   title: 'Upload Complete!',
   progress: 100,
 }));
+```
+
+## Customization
+
+### Custom Theme Colors
+
+You can customize toast gradient colors to match your brand:
+
+```typescript
+import { ToastProvider } from '@prmichaelsen/pretty-toasts/standalone';
+
+const customTheme = {
+  toast: {
+    success: {
+      from: '#10b981', // emerald-500
+      to: '#3b82f6',   // blue-500
+      opacity: 0.95,
+    },
+    error: {
+      from: '#dc2626', // red-600
+      to: '#991b1b',   // red-800
+      opacity: 0.95,
+    },
+    // warning and info will use default colors
+  },
+};
+
+function App() {
+  return (
+    <ToastProvider theme={customTheme}>
+      <MyApp />
+      <StandaloneToastContainer />
+    </ToastProvider>
+  );
+}
+```
+
+### Partial Theme Override
+
+You only need to specify the toast types you want to customize:
+
+```typescript
+const partialTheme = {
+  toast: {
+    success: { from: '#10b981', to: '#3b82f6' },
+    // error, warning, info use defaults
+  },
+};
+```
+
+### Dark Mode Example
+
+```typescript
+const darkTheme = {
+  toast: {
+    success: { from: '#065f46', to: '#047857', opacity: 0.95 },
+    error: { from: '#7f1d1d', to: '#991b1b', opacity: 0.95 },
+    warning: { from: '#78350f', to: '#92400e', opacity: 0.95 },
+    info: { from: '#1e3a8a', to: '#1e40af', opacity: 0.95 },
+  },
+};
 ```
 
 ## Styling
