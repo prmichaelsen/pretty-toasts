@@ -13,14 +13,12 @@ interface AnimatedToast extends ToastType {
 interface ToastContainerProps {
   toasts: ToastType[];
   onRemoveToast: (id: string) => void;
-  onClearAll: () => void;
   isDesktop?: boolean;
 }
 
 export const ToastContainer: React.FC<ToastContainerProps> = ({
   toasts,
   onRemoveToast,
-  onClearAll,
   isDesktop = true,
 }) => {
   const [animatedToasts, setAnimatedToasts] = useState<AnimatedToast[]>([]);
@@ -123,26 +121,9 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
     }
   }, [animatedToasts, handleToastExitComplete]);
 
-  const handleClickOutside = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as Element;
-      const toastContainer = document.querySelector("[data-toast-container]");
-
-      if (toastContainer && !toastContainer.contains(target)) {
-        onClearAll();
-      }
-    },
-    [onClearAll]
-  );
-
-  useEffect(() => {
-    if (animatedToasts.length > 0) {
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }
-  }, [animatedToasts.length, handleClickOutside]);
+  // Removed aggressive click-outside handler that was clearing all toasts
+  // when clicking buttons to create new toasts. This was causing the stacking bug.
+  // Users can still dismiss individual toasts by swiping or clicking the X button.
 
   if (!animatedToasts || animatedToasts.length === 0) {
     return null;

@@ -3,7 +3,7 @@
 
 project:
   name: pretty-toasts
-  version: 2.1.4
+  version: 3.0.1
   started: 2026-02-14
   status: in_progress
   current_milestone: M2
@@ -36,12 +36,15 @@ milestones:
     completed: null
     estimated_weeks: 1
     tasks_completed: 0
-    tasks_total: 3
+    tasks_total: 5
     notes: |
       Storybook setup attempted but currently blocked by Vite 7 incompatibility.
       Storybook 8.6.15 installed with basic configuration. Stories created but
       showing infinite loading due to Vite version mismatch. Need to downgrade
       Vite from 7.3.1 to 5.x for compatibility.
+      
+      Task 12 added: GitHub Pages interactive demo (alternative to Storybook).
+      Task 13 added: Fix toast stacking bug (HIGH PRIORITY).
 
 # Tasks are granular work items within milestones
 tasks:
@@ -143,14 +146,69 @@ tasks:
       notes: |
         Comprehensive E2E tests covering all interactions, accessibility,
         and visual behavior. Tests run against Storybook.
+    
+    - id: task-10
+      name: Remove Tailwind Dependency
+      status: completed
+      file: agent/tasks/task-10-remove-tailwind-dependency.md
+      estimated_hours: 3
+      completed_date: 2026-02-15
+      notes: |
+        ✅ Removed Tailwind CSS dependency completely
+        ✅ Converted all components to inline styles
+        ✅ Preserved exact visual appearance
+        ✅ Zero CSS configuration required
+        ✅ Build successful - CJS 27KB, ESM 26KB
+    
+    - id: task-11
+      name: Add Custom Gradient Theme Support
+      status: completed
+      file: agent/tasks/task-11-custom-gradient-themes.md
+      estimated_hours: 4
+      completed_date: 2026-02-15
+      notes: |
+        ✅ Created theme type system (GradientConfig, ToastTheme, CompleteTheme)
+        ✅ Created ThemeProvider and useTheme() hook
+        ✅ Converted style helpers to theme-aware hooks
+        ✅ Updated Toast component to use theme context
+        ✅ Updated ToastProvider to accept theme prop
+        ✅ Exported theme types from standalone.ts and redux.ts
+        ✅ Build successful - all types generated
+        🎨 Users can now customize toast colors to match their brand!
+    
+    - id: task-12
+      name: Create GitHub Pages Interactive Demo
+      status: not_started
+      file: agent/tasks/task-12-github-pages-demo.md
+      estimated_hours: 5
+      completed_date: null
+      notes: |
+        Interactive demo site showcasing all library features.
+        Alternative to Storybook that doesn't require Vite downgrade.
+        Will deploy automatically to GitHub Pages via Actions.
+    
+    - id: task-13
+      name: Fix Toast Stacking Bug
+      status: completed
+      file: agent/tasks/task-13-fix-toast-stacking-bug.md
+      estimated_hours: 3
+      completed_date: 2026-02-15
+      priority: high
+      notes: |
+        ✅ FIXED! Root cause: Aggressive click-outside handler clearing all toasts
+        ✅ Removed click-outside event listener from ToastContainer
+        ✅ Updated StandaloneToastContainer and ReduxToastContainer
+        ✅ Build successful - v3.0.1 released
+        ✅ CHANGELOG.md created with version history
+        🎉 Toast stacking now works correctly!
 
 # Documentation tracking
 documentation:
   design_documents: 1
   milestone_documents: 0
   pattern_documents: 0
-  task_documents: 10
-  last_updated: 2026-02-14
+  task_documents: 13
+  last_updated: 2026-02-15
 
 # Overall progress metrics
 progress:
@@ -164,7 +222,45 @@ progress:
 recent_work:
   - date: 2026-02-15
     description: |
-      🎉 TASK 11 COMPLETE! Added custom gradient theme support for brand color customization!
+      🎉 TASK 13 COMPLETE! Fixed critical toast stacking bug - v3.0.1 released!
+    items:
+      - ✅ Identified root cause: Aggressive click-outside handler in ToastContainer
+      - ✅ Removed click-outside event listener (lines 126-145)
+      - ✅ Removed onClearAll prop from ToastContainer interface
+      - ✅ Updated StandaloneToastContainer - removed clearAllToasts usage
+      - ✅ Updated ReduxToastContainer - removed clearAllToasts import
+      - ✅ Build successful - all files generated
+      - ✅ Created CHANGELOG.md with full version history
+      - ✅ Updated package.json to v3.0.1
+      - ✅ Updated task document with root cause analysis
+      - 🐛 Bug fixed: Multiple toasts now stack correctly!
+
+  - date: 2026-02-15
+    description: |
+      📋 Created Task 12: GitHub Pages Interactive Demo
+    items:
+      - ✅ Created agent/tasks/task-12-github-pages-demo.md
+      - 📝 Comprehensive task document with full implementation details
+      - 🎯 Alternative to Storybook (no Vite downgrade required)
+      - 🚀 Will deploy automatically to GitHub Pages
+      - 🎨 Replicates agentbase.me toast-test page functionality
+      - ⚡ Uses Vite for fast development and small bundle size
+      - 📦 Self-contained demo with inline styles
+      - 🔄 Automated deployment via GitHub Actions
+  
+  - date: 2026-02-15
+    description: |
+      📋 Created Task 13: Fix Toast Stacking Bug (HIGH PRIORITY)
+    items:
+      - ✅ Created agent/tasks/task-13-fix-toast-stacking-bug.md
+      - 🔍 Comprehensive investigation plan with 6 hypotheses
+      - 🛠️ Multiple fix strategies documented
+      - 🧪 Test cases and verification checklist included
+      - 📝 Documentation updates planned
+
+  - date: 2026-02-15
+    description: |
+      � TASK 11 COMPLETE! Added custom gradient theme support for brand color customization!
     items:
       - ✅ Created theme type system (GradientConfig, ToastTheme, CompleteTheme)
       - ✅ Created ThemeProvider and useTheme() hook
@@ -214,14 +310,17 @@ recent_work:
 # Next steps (prioritized list)
 next_steps:
   - Continue Milestone 2 (M2) - Testing & Documentation:
-    - Task 7: Resolve Storybook blocker (downgrade Vite 7.3.1 → 5.x)
-    - Task 7: Complete Storybook setup with working stories
-    - Task 8: Deploy Storybook to GitHub Pages
+    - Task 12: Implement GitHub Pages interactive demo (NEW - alternative to Storybook)
+    - Task 7: Resolve Storybook blocker (downgrade Vite 7.3.1 → 5.x) OR skip if Task 12 sufficient
+    - Task 8: Deploy Storybook to GitHub Pages (may be superseded by Task 12)
     - Task 9: Implement Cypress E2E tests
+  - Release v3.0.1:
+    - Git commit and push changes
+    - Tag release v3.0.1
+    - Publish to NPM registry
   - Optional enhancements:
     - Add unit tests with Vitest
     - Create example projects (with-redux, standalone)
-    - Publish to NPM registry
     - Add CI/CD pipeline
 
 # General notes and observations
@@ -240,6 +339,7 @@ current_blockers:
   - Storybook infinite loading - Vite 7.3.1 incompatible with Storybook 8 (M2 blocker)
   - Storybook terminal running but stories return 500 errors on iframe.html
   - Need to downgrade Vite to 5.x to resolve Storybook compatibility
+  - Note: Task 12 (GitHub Pages demo) may make Storybook optional
 
 # Team and contributors
 team:

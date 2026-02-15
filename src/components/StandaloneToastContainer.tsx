@@ -9,14 +9,13 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
  * Must be used within a ToastProvider
  */
 export const StandaloneToastContainer: React.FC = () => {
-  const { toasts, removeToast, clearAllToasts } = useToastContext();
+  const { toasts, removeToast } = useToastContext();
   const isDesktop = useMediaQuery('(min-width: 640px)');
 
   return (
     <ToastContainer
       toasts={toasts}
       onRemoveToast={removeToast}
-      onClearAll={clearAllToasts}
       isDesktop={isDesktop}
     />
   );
