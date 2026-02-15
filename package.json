@@ -1,6 +1,6 @@
 {
   "name": "@prmichaelsen/pretty-toasts",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Beautiful gradient toast notifications with Redux and standalone support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
