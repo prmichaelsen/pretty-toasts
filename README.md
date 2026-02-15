@@ -16,7 +16,8 @@ Beautiful gradient toast notifications for React with Redux and standalone suppo
 
 ## Features
 
-- 🎨 **Beautiful Gradient Styling** - Purple/indigo for success, purple/rose for error, amber/orange for warning, blue/purple for info
+- 🎨 **Beautiful Gradient Styling** - Purple/indigo for success, purple/rose for error, orange/purple for warning, blue/purple for info
+- 🎨 **Custom Theme Support** - Customize gradient colors to match your brand
 - 🔄 **Redux & Standalone Support** - Use with Redux Toolkit or standalone React Context
 - ⏱️ **Auto-dismiss with Progress Bar** - Configurable duration with visual progress indicator
 - 👆 **Interactive Gestures** - Swipe/drag to dismiss, hover to pause, click to make permanent
