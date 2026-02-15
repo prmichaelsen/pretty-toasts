@@ -34,9 +34,10 @@
     "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
-    "demo:dev": "cd demo && npm run dev",
-    "demo:build": "npm run build && cd demo && npm run build",
-    "demo:preview": "cd demo && npm run preview"
+    "demo:standalone": "cd demos/standalone && npm run dev",
+    "demo:redux": "cd demos/redux && npm run dev",
+    "demo:build": "npm run build && cd demos/standalone && npm run build && cd ../redux && npm run build",
+    "demo:install": "cd demos/standalone && npm install && cd ../redux && npm install"
   },
   "keywords": [
     "toast",

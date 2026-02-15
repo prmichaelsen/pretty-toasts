@@ -122,10 +122,10 @@ function App() {
     }}>
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>
-          Toast Test Page
+          Toast Test Page (Standalone)
         </h1>
         <p style={{ color: '#cbd5e1', marginBottom: '2rem' }}>
-          Test the @prmichaelsen/pretty-toasts library with various configurations
+          Test the @prmichaelsen/pretty-toasts library with React Context
         </p>
 
         <div style={{
