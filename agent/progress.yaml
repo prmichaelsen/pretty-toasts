@@ -31,20 +31,18 @@ milestones:
   - id: M2
     name: Testing & Documentation
     status: in_progress
-    progress: 40
+    progress: 50
     started: 2026-02-14
     completed: null
     estimated_weeks: 1
-    tasks_completed: 0
-    tasks_total: 5
+    tasks_completed: 2
+    tasks_total: 6
     notes: |
-      Storybook setup attempted but currently blocked by Vite 7 incompatibility.
-      Storybook 8.6.15 installed with basic configuration. Stories created but
-      showing infinite loading due to Vite version mismatch. Need to downgrade
-      Vite from 7.3.1 to 5.x for compatibility.
+      Task 12 COMPLETE: GitHub Pages demo created with beautiful gradient styling.
+      Task 13 COMPLETE: Fixed toast stacking and positioning bugs (v3.0.1, v3.0.2).
+      Task 14 ADDED: Fix React setState warning in Toast component.
       
-      Task 12 added: GitHub Pages interactive demo (alternative to Storybook).
-      Task 13 added: Fix toast stacking bug (HIGH PRIORITY).
+      Storybook still blocked by Vite 7 incompatibility (may skip in favor of GitHub Pages demo).
 
 # Tasks are granular work items within milestones
 tasks:

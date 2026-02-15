@@ -143,7 +143,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
         const newProgress = prev + 100 / (duration / 100);
         if (newProgress >= 100) {
           clearInterval(interval);
-          handleRemove();
+          // Defer handleRemove to next tick to avoid setState during render warning
+          setTimeout(() => handleRemove(), 0);
           return 100;
         }
         return newProgress;
