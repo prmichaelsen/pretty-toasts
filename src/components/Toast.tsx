@@ -11,6 +11,7 @@ interface ToastProps {
 
 export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMakePermanent }) => {
   const removeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const rafIdRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(toast.progress || 0);
   const [isPaused, setIsPaused] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
@@ -44,12 +45,20 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       if (!isDragging) return;
-      const touch = e.touches[0];
-      const currentX = touch.clientX;
-      const deltaX = currentX - startX;
+      
+      // Throttle with requestAnimationFrame for smooth 60fps
+      if (!rafIdRef.current) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          const touch = e.touches[0];
+          const currentX = touch.clientX;
+          const deltaX = currentX - startX;
 
-      if (deltaX > 0) {
-        setSwipeOffset(deltaX);
+          if (deltaX > 0) {
+            setSwipeOffset(deltaX);
+          }
+          
+          rafIdRef.current = null;
+        });
       }
     },
     [isDragging, startX]
@@ -87,22 +96,29 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
     (e: React.MouseEvent) => {
       if (e.buttons !== 1) return; // Only if left mouse button is pressed
 
-      const currentX = e.clientX;
-      const deltaX = currentX - startX;
+      // Throttle with requestAnimationFrame for smooth 60fps
+      if (!rafIdRef.current) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          const currentX = e.clientX;
+          const deltaX = currentX - startX;
 
-      // Mark that mouse has moved
-      if (Math.abs(deltaX) > 2) {
-        setHasMoved(true);
-      }
+          // Mark that mouse has moved
+          if (Math.abs(deltaX) > 2) {
+            setHasMoved(true);
+          }
 
-      // Only start dragging if moved more than 5px
-      if (Math.abs(deltaX) > 5 && !isDragging) {
-        setIsDragging(true);
-        setIsPaused(true);
-      }
+          // Only start dragging if moved more than 5px
+          if (Math.abs(deltaX) > 5 && !isDragging) {
+            setIsDragging(true);
+            setIsPaused(true);
+          }
 
-      if (isDragging && deltaX > 0) {
-        setSwipeOffset(deltaX);
+          if (isDragging && deltaX > 0) {
+            setSwipeOffset(deltaX);
+          }
+          
+          rafIdRef.current = null;
+        });
       }
     },
     [isDragging, startX]
@@ -159,6 +175,9 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
       if (removeTimeoutRef.current) {
         clearTimeout(removeTimeoutRef.current);
       }
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 
@@ -195,8 +214,9 @@ export const Toast: React.FC<ToastProps> = ({ toast, isExiting, onRemove, onMake
             ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
             : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
           cursor: toast.isPermanent ? 'default' : isDragging ? 'grabbing' : 'grab',
-          transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-          transform: `translateX(${swipeOffset}px) scale(${isHovered ? 1.05 : 1})`,
+          transition: isDragging ? 'none' : 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: `translate3d(${swipeOffset}px, 0, 0) scale(${isHovered ? 1.05 : 1})`,
+          willChange: isDragging ? 'transform' : 'auto',
           opacity: Math.max(0.3, 1 - swipeOffset / 200),
           width: '100%',
           position: 'relative',
