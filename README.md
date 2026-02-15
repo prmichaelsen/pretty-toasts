@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@prmichaelsen/pretty-toasts.svg)](https://www.npmjs.com/package/@prmichaelsen/pretty-toasts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Unit Tests](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/test.yml/badge.svg)](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/test.yml)
+[![E2E Tests](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/e2e-tests.yml)
 [![Deploy Demo](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/deploy-demo.yml/badge.svg)](https://github.com/prmichaelsen/pretty-toasts/actions/workflows/deploy-demo.yml)
 [![codecov](https://codecov.io/gh/prmichaelsen/pretty-toasts/branch/mainline/graph/badge.svg)](https://codecov.io/gh/prmichaelsen/pretty-toasts)
 [![npm downloads](https://img.shields.io/npm/dm/@prmichaelsen/pretty-toasts.svg)](https://www.npmjs.com/package/@prmichaelsen/pretty-toasts)
