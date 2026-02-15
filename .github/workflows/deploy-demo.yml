@@ -25,16 +25,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install library dependencies (no Storybook)
+        run: npm install --omit=dev --ignore-scripts
 
       - name: Build library
         run: npm run build
 
       - name: Install standalone demo dependencies
-        run: cd demos/standalone && npm ci
+        run: cd demos/standalone && npm install
 
       - name: Build standalone demo
         run: cd demos/standalone && npm run build
