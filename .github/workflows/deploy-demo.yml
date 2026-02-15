@@ -26,16 +26,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install library dependencies (no Storybook)
-        run: npm install --omit=dev --ignore-scripts --legacy-peer-deps
+      - name: Install library production dependencies only
+        run: npm install --production --legacy-peer-deps
 
       - name: Build library
         run: npm run build
 
-      - name: Install standalone demo dependencies
+      - name: Install demo dependencies (includes local library)
         run: cd demos/standalone && npm install
 
-      - name: Build standalone demo
+      - name: Build demo
         run: cd demos/standalone && npm run build
 
       - name: Upload artifact
